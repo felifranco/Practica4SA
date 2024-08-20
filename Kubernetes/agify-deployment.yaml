@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-agify-deployment
+  labels:
+    app: micro-agify
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: micro-agify
+  template:
+    metadata:
+      labels:
+        app: micro-agify
+    spec:
+      containers:
+        - name: micro-agify
+          image: f64franco/micro-agify:develop
+          imagePullPolicy: "Always"
+          ports:
+            - containerPort: 3000
+          env:
+            - name: HOST
+              value: "0.0.0.0"
+            - name: PORT
+              value: "3000"
